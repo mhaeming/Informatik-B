@@ -21,6 +21,7 @@ public class TestFraction {
         testMultiplyInt();
         testMultiplyFraction();
         testMultiplyFractions();
+        testFractionDenominatorIsZero();
     }
 
 
@@ -103,5 +104,18 @@ public class TestFraction {
         testList[1] = new Fraction(4, 3);
         testList[2] = new Fraction(9, 11);
         assertVals(72, 385, f1.multiply(testList));
+    }
+
+    public void testFractionDenominatorIsZero(){
+        boolean exceptionThrown = false;
+        try {
+            Fraction f1 = new Fraction(10, 0);
+        } catch (Exception e){
+            exceptionThrown = true;
+        }
+        if (!exceptionThrown){ // Es sollte eine Exception auftreten, falls nicht wurde ein Fehler gefunden, da ein Bruch mit Nenner=0 erstellt wurde
+            System.out.println("FEHLER: Bruch mit Nenner von 0 erstellt");
+            errors++;
+        }
     }
 }
