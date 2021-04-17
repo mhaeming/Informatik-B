@@ -41,6 +41,10 @@ public class Fraction {
         }
     }
 
+    /**
+     * Initialisiere einen Bruch, wenn nur ein Zähler angegeben wird, mit dem gegebenen Nenner und dem Zähler 1
+     * @param numerator Zähler des Bruchs
+     */
     public Fraction(int numerator) {
         this(numerator, 1);
     }
