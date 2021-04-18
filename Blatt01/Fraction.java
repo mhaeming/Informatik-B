@@ -19,7 +19,7 @@ public class Fraction {
      * Initialisiert einen gekürzten Bruch. Wird nur eine Zahl gegeben, so wird diese als Zähler zum Nenner 1 gesetzt.
      * 
      * @param numerator Zähler des Bruches
-     * @param numerator Nenner des Bruches
+     * @param denominator Nenner des Bruches
      */
     public Fraction(int numerator, int denominator) {
 
@@ -41,12 +41,18 @@ public class Fraction {
         }
     }
 
+    /**
+     * Initialisiere einen Bruch, wenn nur ein Zähler angegeben wird, mit dem gegebenen Nenner und dem Zähler 1
+     * @param numerator Zähler des Bruchs
+     */
     public Fraction(int numerator) {
         this(numerator, 1);
     }
 
     /**
      * Gibt den Bruch als String der Form "a/b" zurück
+     *
+     * @return Bruch als String
      */
     public String toString() {
         return this.numerator + "/" + this.denominator;
