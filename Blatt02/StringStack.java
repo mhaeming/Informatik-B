@@ -29,6 +29,30 @@ public class StringStack {
    }
 
    /**
+    * Copy constructor
+    * 
+    * @param original String stack to be copied
+    */
+   public StringStack(StringStack original) {
+      StringStack tmp = new StringStack();
+
+      // unpacks the stack and puts it into stack with inverse order
+      while (!original.empty()) {
+         tmp.push(original.pop());
+      }
+
+      // Unpack the tmp stack elements and push into the original stack and the copy
+      while (!tmp.empty()) {
+         String tmpStr = tmp.peek();
+
+         original.push(tmpStr);
+         this.push(tmpStr);
+
+         tmp.pop();
+      }
+   }
+
+   /**
     * Returns the first element in the stack. Throws Exception when stack is
     * empty
     * 
