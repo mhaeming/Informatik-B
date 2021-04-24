@@ -53,15 +53,15 @@ public class Arena {
                 return 10;
             }
 
-        } else if (x <= 0 && x >= -1.5 && y < 0 && y >= -1.5) { // Third case, third quadrant (=left, lower)
+        } else if (x < 0 && x >= -1.5 && y < 0 && y >= -1.5) { // Third case, third quadrant (=left, lower)
 
             // Now we separate the cases, 0-30 degrees, 31-60 degrees or 61-90 degrees
             if(alpha <= 30) {
-                return 9;
+                return 7;
             } else if (alpha <= 60) {
                 return 8;
             } else {
-                return 7;
+                return 9;
             }
         } else if (x >= 0 && x <= 1.5 && y < 0 && y >= -1.5) { // Fourth case, fourth quadrant (=right, lower)
 
