@@ -24,6 +24,8 @@ public class TestCompany {
         System.gc();
         apple.changeStockPrice(106.7);
         amazon.changeStockPrice(96.2);
-        // System.gc();
+        
+        // Optional while loop, if the program closes before the gc runs
+        while (true) {}
     }
 }
