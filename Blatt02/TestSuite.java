@@ -1,19 +1,24 @@
 public class TestSuite {
 
     private static int errors;
+    private static int tests;
 
     public static int getErrors() {
         return TestSuite.errors;
     }
 
+    public static int getTests(){ return TestSuite.tests;}
+
     public static void countError() {
         TestSuite.errors++;
     }
 
+    public static void countTest() {TestSuite.tests++; }
+
     // Integers
     public static void assertEquals(int expected, int actual, String errMsg) {
         if (expected != actual) {
-            System.out.println("ASSERTION ERROR: expected " + expected + " but received " + actual + " Details: " + errMsg);
+            System.out.println("ASSERTION ERROR: expected " + expected + " but received " + actual + " - Details: " + errMsg);
             errors++;
         }
     }
