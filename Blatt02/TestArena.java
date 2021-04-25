@@ -4,16 +4,6 @@
 public class TestArena {
 
     /**
-     * amount of found errors
-     */
-    private int errors;
-
-    /**
-     * amount of tests that we run
-     */
-    private int tests;
-
-    /**
      * the main method
      * @param args not used here
      */
@@ -21,7 +11,7 @@ public class TestArena {
         System.out.println("Start tests");
         TestArena tester = new TestArena();
         tester.startTests();
-        System.out.println(tester.errors + " Errors found at " + tester.tests + " tests.");
+        System.out.println(TestSuite.getErrors() + " Errors found at " + TestSuite.getTests() + " tests.");
 
     }
     /**
@@ -48,13 +38,11 @@ public class TestArena {
      * @param x,y the position of the tribute
      */
     public void assertVals(int correctArea, double x, double y){
-        tests++;
+        TestSuite.countTest();
         Arena arena = new Arena();
         int area = arena.getArea(x,y);
-        if(correctArea != area){
-            errors++;
-            System.out.println("Error found, was supposed to be Area " + correctArea + " with coordinates " + x + "|" + y + ", but was calculated as Area " + area);
-        }
+        String errMsg = "Was supposed to be Area " + correctArea + " with coordinates " + x + "|" + y + ", but was calculated as Area " + area;
+        TestSuite.assertEquals(correctArea, area, errMsg);
     }
 
 
