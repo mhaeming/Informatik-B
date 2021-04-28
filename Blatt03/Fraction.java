@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.NotNull;
-
 /**
  * Every instance of <code>Fraction</code> represents a fraction with numerator
  * and denominator.
@@ -8,7 +6,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public class Fraction {
 
-   
    /**
     * Creates greatest common divisor for a and b.
     *
@@ -174,7 +171,7 @@ public class Fraction {
    }
 
    /**
-    * Extends this Fraction and the given fraction such that they have the same denominator
+    * Extends this Fraction and the given Fraction such that they have the same denominator
     * @param fraction the second fraction
     * @return a list of: extended num. of this fraction, extended denom. of this fraction, then of given
     */
@@ -187,4 +184,31 @@ public class Fraction {
       return result;
    }
 
-}
+   /**
+    * Takes a Fraction as a String (written in the way the ToString methods shows)
+    * and returns it as a fraction of type Fraction
+    * @param fractionString the Fraction as a string that we want to parse into type Fraction
+    * @return the given Fraction-String as a fraction of type Fraction
+    */
+   public static Fraction parseFraction(String fractionString){
+      /*
+      The regex for parseFraction:
+      Number of digits (not starting with 0), division sign, number of digits not starting with 0
+      ^[1-9] [0-9]* [\\/] [1-9] [0-9]*
+      */
+      boolean isCorrectFraction = fractionString.matches("^[1-9][0-9]*[\\/][1-9][0-9]*");
+      if (!isCorrectFraction) {
+         System.err.println("Not a valid format for a fraction!");
+         return null;
+      }
+      else{
+         String[] splittedFraction = fractionString.split("\\/");
+         int numerator = Integer.parseInt(splittedFraction[0]);
+         int denominator = Integer.parseInt(splittedFraction[1]);
+         return new Fraction(numerator, denominator);
+      }
+   }
+
+   }
+
+
