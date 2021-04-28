@@ -1,3 +1,5 @@
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Every instance of <code>Fraction</code> represents a fraction with numerator
  * and denominator.
@@ -6,6 +8,7 @@
  */
 public class Fraction {
 
+   
    /**
     * Creates greatest common divisor for a and b.
     *
@@ -148,4 +151,40 @@ public class Fraction {
    public String toString() {
       return numerator + "/" + denominator;
    }
+
+
+   /**
+    * Adds the Fraction addend to this Fraction
+    * @param addend
+    * @return the sum as a new Fraction
+    */
+   public Fraction add(Fraction addend){
+      int[] extended = this.extend(addend);
+      return new Fraction(extended[0] + extended[2], extended[1]);
+   }
+
+   /**
+    * Subtracts the Fraction subtrahend from this Fraction
+    * @param subtrahend
+    * @return the result of the subtraction as a new Fraction
+    */
+   public Fraction subtract(Fraction subtrahend){
+      int[] extended = this.extend(subtrahend);
+      return new Fraction(extended[0] - extended[2], extended[1]);
+   }
+
+   /**
+    * Extends this Fraction and the given fraction such that they have the same denominator
+    * @param fraction the second fraction
+    * @return a list of: extended num. of this fraction, extended denom. of this fraction, then of given
+    */
+   public int[] extend(Fraction fraction){
+      int extendedNumerator = this.numerator * fraction.getDenominator();
+      int extendedDenominator = this.denominator * fraction.getDenominator();
+      int extendedNumeratorGiven = fraction.getNumerator() * this.denominator;
+      int extendedDenominatorGiven = fraction.getDenominator() * this.denominator;
+      int[] result = {extendedNumerator, extendedDenominator, extendedNumeratorGiven, extendedDenominatorGiven};
+      return result;
+   }
+
 }
