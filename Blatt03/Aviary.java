@@ -13,7 +13,7 @@ public class Aviary {
       System.out.println("3: dodo.getAbility()              : " + dodo.getAbility());
 
       Parrot parrot = new Parrot();
-      System.out.println("4: parrot.allAbilities()            : " + parrot.allAbilities());
+      System.out.println("4: parrot.allAbilities()          : " + parrot.allAbilities());
       System.out.println("5: parrot.ability                 : " + parrot.ability);
 
       Bird carsten = new Dodo();
