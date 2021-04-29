@@ -9,6 +9,7 @@ public class TestSuite {
 
     public static int getTests(){ return TestSuite.tests;}
 
+    // Count tests and errors - these methods are made for use outside of this class!
     public static void countError() {
         TestSuite.errors++;
     }
