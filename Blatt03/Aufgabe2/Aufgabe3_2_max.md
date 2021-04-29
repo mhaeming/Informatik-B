@@ -1,4 +1,4 @@
-Rechenoperation::= Bruch " " Operator " " Bruch | Rechenoperation | "( " Rechenoperation " )"
+Rechenoperation::= Bruch | ("( " Bruch " )") | (Bruch " " Operator " " Rechenoperation | ("( " Rechenoperation " )"))
 
 Bruch::= ["-"] "0" | (ZifferOhne0 {Ziffer}) "/" ZifferOhne0 {Ziffer}
 
