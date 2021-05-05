@@ -29,3 +29,6 @@ hs_err_pid*
 **/out
 
 *.iml
+# Storefiles
+
+**/.DS_Store
