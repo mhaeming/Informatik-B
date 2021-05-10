@@ -17,9 +17,25 @@ public class Point2D extends Point{
         this.y = positions[1];
     }
 
+    public double getX() {
+        return this.x;
+    }
+
+    public double getY() {
+        return this.y;
+    }
+
     public Geometry encapsulate(Geometry other) {
         if (this.dimensions() != other.dimensions()) return null;
-        // TODO: Create a Rectangle to encapsulate the point
+        
+        if (other instanceof Rectangle) {
+            return other.encapsulate(this);
+        }
+        
+        if (other instanceof Point2D) {
+            return new Rectangle(this, (Point2D)other);
+        }
+
         return null;
     }
 

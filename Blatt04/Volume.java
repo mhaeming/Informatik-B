@@ -1,4 +1,6 @@
-public class Volume extends Geometry{
+import javax.print.attribute.standard.MediaSize.Other;
+
+public class Volume extends Geometry implements Comparable{
     private Point x;
     private Point y;
 
@@ -30,6 +32,19 @@ public class Volume extends Geometry{
     public Geometry encapsulate(Geometry other) {
         // TODO: Not sure how the method has to look here
         return null;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        // Confirm that it's compared to a volume
+        if (!(o instanceof Volume)) throw new RuntimeException("You have to compare the same data types");
+
+        // Ensure same dimensions
+        if (this.dimensions() != ((Volume)o).dimensions()) throw new RuntimeException("Geometry for encapsulation must be of same dimensionality!");
+
+        if (volume() > ((Volume)o).volume()) return 1;
+        if (volume() < ((Volume)o).volume()) return -1;
+        return 0;
     }
     
 }

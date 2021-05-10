@@ -3,7 +3,6 @@ public class Point extends Geometry implements Comparable{
 
     public Point(double... positions) {
         super(positions.length);
-        
         values = positions;
     }
 
@@ -22,11 +21,9 @@ public class Point extends Geometry implements Comparable{
     @Override
     public Geometry encapsulate(Geometry other) {
         if (this.dimensions() != other.dimensions()) return null;
-        // TODO: Encapsulate. Relies on compareTo method.
+        // TODO: Create a volume to encompass other volumes or n-dim Points
         return null;
     }
-
-
 
     public double[] values() {
         return values;
