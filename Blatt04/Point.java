@@ -14,14 +14,24 @@ public class Point extends Geometry implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        // TODO: Comparing method
+        // Does not really make sense to compare points by volume, right?
         return 0;
     }
 
     @Override
     public Geometry encapsulate(Geometry other) {
         if (this.dimensions() != other.dimensions()) return null;
-        // TODO: Create a volume to encompass other volumes or n-dim Points
+        
+        // Create a volume out of two points
+        if (other instanceof Point) {
+            return new Volume(this, (Point)other);
+        }
+
+        // Create an encapsulating volume for the other volume and this point
+        if (other instanceof Volume) {
+            return other.encapsulate(this);
+        }
+
         return null;
     }
 
