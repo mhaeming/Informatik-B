@@ -1,3 +1,4 @@
+package geometry;
 /**
  * Every Geometry represents a body in a data-space with {@link #dimensions()}.
  *
