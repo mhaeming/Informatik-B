@@ -3,7 +3,7 @@ import util.List;
 
 public class Library {
 
-    public static void main(String[] args){
+/*    public static void main(String[] args){
         Library library = new Library();
         Book book = new Book("Der Hering", "Per Starke");
         BluRay bluRay = new BluRay("Hering - der Film", "Max");
@@ -16,7 +16,7 @@ public class Library {
         list.advance();
         elem = (LibraryItem)list.elem();
         System.out.println(elem.getDescription());
-    }
+    }*/
 
 
     /**

@@ -24,7 +24,7 @@ public class TestLibrary {
     public void testInitilization() {
         Library lib = new Library();
         List result = lib.search("A");
-        TestSuite.assertTrue(result.empty(), "Intial library should be empty");
+        TestSuite.assertTrue(result.empty(), "Initial library should be empty");
     }
 
     public void testSearch() {
@@ -41,13 +41,13 @@ public class TestLibrary {
         TestSuite.assertEquals("This book named 'The Lord of the Rings' was written by J.R.R. Tolkien.", ((LibraryItem) result.elem()).getDescription(), "Unexpected search result");
         result.advance();
         // Assert correct endposition
-        TestSuite.assertTrue(result.endpos(), "Too many enteries in test library");
+        TestSuite.assertTrue(result.endpos(), "Too many entries in test library");
 
         // Specific Query
         result =  lib.search("The Lord");
         TestSuite.assertEquals("This book named 'The Lord of the Rings' was written by J.R.R. Tolkien.", ((LibraryItem) result.elem()).getDescription(), "Unexpected search result 2");
         result.advance();
-        TestSuite.assertTrue(result.endpos(), "Too many enteries in test library 2");
+        TestSuite.assertTrue(result.endpos(), "Too many entries in test library 2");
     }
 
     public void testDeleteItem() {
@@ -64,7 +64,7 @@ public class TestLibrary {
     
         TestSuite.assertEquals("This book named 'The Lord of the Rings' was written by J.R.R. Tolkien.", ((LibraryItem) result.elem()).getDescription(), "Error during deletion");
         result.advance();
-        TestSuite.assertTrue(result.endpos(), "Too many enteries in test library after delete test");
+        TestSuite.assertTrue(result.endpos(), "Too many entries in test library after delete test");
     }
 
     public void testSideEffects() {
