@@ -1,4 +1,8 @@
 package geometry;
+
+/**
+ * A n-dimensional Point
+ */
 public class Point extends Geometry implements Comparable{
     private double[] values;
 
@@ -7,7 +11,9 @@ public class Point extends Geometry implements Comparable{
         values = positions;
     }
 
-
+    /**
+     * @return 0 since the volume of a point is always 0
+     */
     @Override
     public double volume() {
         return 0;
@@ -21,6 +27,7 @@ public class Point extends Geometry implements Comparable{
         // Ensure same dimensions
         if (this.dimensions() != ((Geometry)o).dimensions()) throw new RuntimeException("Geometry for comparisson must be of same dimensionality!");
 
+        // Return the volume difference
         return (int)(this.volume() - ((Geometry) o).volume());
     }
 
@@ -41,10 +48,19 @@ public class Point extends Geometry implements Comparable{
         return null;
     }
 
+    /**
+     * 
+     * @return all values of the point
+     */
     public double[] values() {
         return values;
     }
 
+    /**
+     * 
+     * @param i the index you want the valume from
+     * @return the value of the point for the given dimension
+     */
     public double valueAt(int i) {
         return values[i];
     }
@@ -61,6 +77,7 @@ public class Point extends Geometry implements Comparable{
             return false;
         }
         Point other = (Point) obj;
+        // Compare the values of the points and return false if they are not the same
         for (int i = 0; i < values.length; i++) {
             if (valueAt(i) != other.valueAt(i)) return false;
         }

@@ -1,4 +1,10 @@
 package geometry;
+
+/**
+ * A volume represented by 2 n-dim <code>Points</code>.
+ * Checks with other geometry objects is done by comparing min and max Points (bottom-left and top-right corners if you imagine it in a cartesian coordinate system)
+ * compareTo is implemented by comparing the volume
+ */
 public class Volume extends Geometry implements Comparable{
     private double[] point1vals;
     private double[] point2vals;
@@ -33,7 +39,7 @@ public class Volume extends Geometry implements Comparable{
 
         //TODO: I think finding the min/max could be abstracted into a helper function
 
-
+        // Yes, Point2D is a subclass of Point, but so we can ensure a specific geometry type as return
         if (other instanceof Point2D){
             for (int i = 0; i < this.dimensions(); i++) {
                 absMinPointVals[i] = Double.min(this.getMin().valueAt(i), ((Point2D)other).valueAt(i));
@@ -44,6 +50,7 @@ public class Volume extends Geometry implements Comparable{
             return new Rectangle(min, max);
         }
 
+        // Yes, Rectangle is a subclass of Volume, but so we can ensure a specific geometry type as return
         if (other instanceof Rectangle){
             for (int i = 0; i < this.dimensions(); i++) {
                 absMinPointVals[i] = Double.min(this.getMin().valueAt(i), ((Rectangle)other).getMin().valueAt(i));
@@ -90,6 +97,7 @@ public class Volume extends Geometry implements Comparable{
         // Ensure same dimensions
         if (this.dimensions() != ((Geometry)o).dimensions()) throw new RuntimeException("Geometry for comparisson must be of same dimensionality!");
 
+         // Create an encapsulating volume for the other volume and this point
         return (int)(this.volume() - ((Geometry) o).volume());
     }
 
