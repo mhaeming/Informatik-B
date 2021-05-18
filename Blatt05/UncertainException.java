@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class UncertainException {
 
    private int i = 0;
@@ -67,7 +69,7 @@ public class UncertainException {
    }
 
    public int uncertain2() {
-      for (; ; ) {
+      for (int j = 1; j<10; j++) { // First change done here
          try {
             break;
          } catch (RuntimeException e) {
@@ -152,10 +154,10 @@ public class UncertainException {
       }
    }
 
-   public int uncertain10() {
+   public int uncertain10() { //
       try {
          throw new java.io.IOException();
-      } catch (RuntimeException e) {
+      } catch (IOException e) { // Second change done here
       }
       return 1;
 
