@@ -7,8 +7,12 @@ package bruchrechner;
  * @author Mathias Menninghaus (mathias.menninghaus@uos.de)
  * 
  */
-public class Fraction {
+public class Fraction extends Number {
 
+   public static void main (String[] args){
+      Fraction fraction = new Fraction(10, 3);
+      System.out.println(fraction.doubleValue());
+   }
    /**
     * The regular expression that defines the String representation of a
     * Fraction.
@@ -193,5 +197,42 @@ public class Fraction {
     */
    public String toString() {
       return numerator + "/" + denominator;
+   }
+
+
+   /**
+    * Implements the abstract method doubleValue from the superclass
+    * @return the value of the fraction as a double
+    */
+   public double doubleValue(){
+      double value = (double) numerator / (double) denominator;
+      return value;
+   }
+
+   /**
+    * Implements the abstract method floatValue from the superclass
+    * @return the value of the fraction as a float
+    */
+   public float floatValue(){
+      float value = (float) numerator / (float) denominator;
+      return value;
+   }
+
+   /**
+    * Implements the abstract method intValue from the superclass
+    * @return the value of the fraction as an Integer
+    */
+   public int intValue(){
+      int value = numerator / denominator;
+      return value;
+   }
+
+   /**
+    * Implements the abstract method longValue from the superclass
+    * @return the value of the fraction as a long
+    */
+   public long longValue(){
+      long value = (long) numerator / (long) denominator;
+      return value;
    }
 }
