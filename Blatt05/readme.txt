@@ -1,1 +1,0 @@
-Für Aufgabe 5.1 sind Codedateien nötig, welche Teil der Musterlösung zu Blatt 4 sind. Aus diesem Grund wird diese zip-Datei am 12.05. um 18:00 Uhr erneut hochgeladen, mit den entsprechenden Musterlösungsdateien zu Blatt 4.
