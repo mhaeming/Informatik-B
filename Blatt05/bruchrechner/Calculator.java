@@ -126,7 +126,7 @@ public class Calculator {
 
 
       if (a_is_number && b_is_number){
-         return String.valueOf(calc(Double.parseDouble(a), operator, Double.parseDouble(b)));
+         return calc(Double.parseDouble(a), operator, Double.parseDouble(b));
       }
 
 
@@ -138,14 +138,13 @@ public class Calculator {
          if (fractionB == null){
             return null;
          }
-         return calc(Double.parseDouble(a), operator, fractionB);
+         return calc(Double.parseDouble(a), operator, fractionB.doubleValue());
       }
 
       if (b_is_number){
          if(fractionA == null){
             return null;
          }
-         return calc(fractionA, operator, Double.parseDouble(b));
       }
 
 
@@ -163,95 +162,6 @@ public class Calculator {
 
    }
 
-
-   /**
-    * Calculates the formula given by the double a, an operator, and the Fraction b
-    * @param a the first number, which is a double
-    * @param operator the operator
-    * @param b the second number, which is a Fraction
-    * @return the result of the calculation as a String
-    */
-   public String calc(double a, String operator, Fraction b){
-      System.out.println("Double and Frac");
-
-      String result;
-      double intermediate_result;
-      double numerator = b.getNumerator();
-      double denominator = b.getDenominator();
-
-      switch (operator){
-         case ADD:
-            intermediate_result = a + (numerator / denominator);
-            result = String.valueOf(intermediate_result);
-            break;
-         case SUBSTRACT:
-            intermediate_result = a - (numerator / denominator);
-            result = String.valueOf(intermediate_result);
-            break;
-         case MULTIPLY:
-            intermediate_result = a * (numerator / denominator);
-            result = String.valueOf(intermediate_result);
-            break;
-         case DIVIDE:
-            if (b.getDenominator() == 0){
-               this.errorMessage = "divides zero";
-               return null;
-      }
-            intermediate_result = a / (numerator / denominator);
-            result = String.valueOf(intermediate_result);
-            break;
-         default:
-            this.errorMessage = "Operation " + operator + " unknown";
-            return null;
-      }
-
-      return result;
-   }
-
-   /**
-    * Calculates the formula given by the Fraction a, an operator, and the double b
-    * @param a the first number, which is a Fraction
-    * @param operator the operator
-    * @param b the second number, which is not a Fraction but a double (with or without characters after the comma)
-    * @return the result of the calculation as a String
-    */
-   public String calc(Fraction a, String operator, double b){
-      System.out.println("Frac and double");
-
-      String result;
-      double intermediate_result;
-      double numerator = a.getNumerator();
-      double denominator = a.getDenominator();
-
-      switch(operator){
-         case ADD:
-            intermediate_result = (numerator / denominator) + b;
-            result = String.valueOf(intermediate_result);
-            break;
-         case SUBSTRACT:
-            intermediate_result = (numerator / denominator) - b;
-            result = String.valueOf(intermediate_result);
-            break;
-         case MULTIPLY:
-            intermediate_result = (numerator / denominator) * b;
-            result = String.valueOf(intermediate_result);
-            break;
-         case DIVIDE:
-            if (b==0){
-               this.errorMessage = "divides zero";
-               return null;
-            }
-            intermediate_result = (numerator / denominator) / b;
-            result = String.valueOf(intermediate_result);
-            break;
-         default:
-            this.errorMessage = "Operation " + operator + " unknown";
-            return null;
-      }
-
-      return result;
-   }
-
    /**
     * Calculates the formula given by the two numbers a and b and the operator
     * @param a the first number
@@ -260,7 +170,6 @@ public class Calculator {
     * @return the result of the calculation as a String
     */
    public String calc(double a, String operator, double b){
-      System.out.println("Two doubles");
 
       String result;
 
