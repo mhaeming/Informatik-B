@@ -150,6 +150,7 @@ public class MyList<T> implements Cloneable{
       int result = 1;
       while(!endpos()) {
          result *= elem().hashCode();
+         advance();
       }
       return result;
    }
