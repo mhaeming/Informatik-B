@@ -147,9 +147,10 @@ public class MyList<T> implements Cloneable{
 
    @Override
    public int hashCode() {
+      int prime = 13;
       int result = 1;
       while(!endpos()) {
-         result *= elem().hashCode();
+         result *= prime + elem().hashCode();
          advance();
       }
       return result;
