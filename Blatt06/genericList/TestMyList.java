@@ -27,7 +27,8 @@ public class TestMyList {
         testDifferentListsAreUnequal();
         testEqualsReflexivity();
         testEqualsSymmetry();
-       // testEqualsTransitivity();
+        testEqualsTransitivity();
+        testEqualsConsistency();
     }
 
     /**
@@ -76,13 +77,21 @@ public class TestMyList {
         MyList<String> myStringList = new MyList<String>();
         MyList<String> myClonedStringList = (MyList<String>)myStringList.clone();
 
-        TestSuite.assertEquals(myStringList, myClonedStringList, "Cloned String List does not equal original");
+        TestSuite.assertEquals(myStringList, myClonedStringList, "Cloned empty String List does not equal original");
+
+        // Test with String List with added String
+        myStringList.add("Hallo");
+        myClonedStringList = (MyList<String>)myStringList.clone();
+
+        System.out.println(myStringList.equals(myClonedStringList));
+        //TestSuite.assertEquals(myStringList, myClonedStringList, "Non-empty cloned String List does not equal original");
+
 
         // Test with Integer List
         MyList<Integer> myIntegerList = new MyList<Integer>();
         MyList<Integer> myClonedIntegerList = (MyList<Integer>)myIntegerList.clone();
 
-        TestSuite.assertEquals(myIntegerList, myClonedIntegerList, "Cloned Integer List does not equal original");
+        TestSuite.assertEquals(myIntegerList, myClonedIntegerList, "Cloned empty Integer List does not equal original");
     }
 
     /*
@@ -97,13 +106,14 @@ public class TestMyList {
         MyList<String> myStringList = new MyList<String>();
         MyList<String> mySecondStringList = new MyList<String>();
 
-        TestSuite.assertEquals(myStringList, mySecondStringList, "Two empty (=equal) String Lists not asserted equal");
+       TestSuite.assertEquals(myStringList, mySecondStringList, "Two empty (=equal) String Lists not asserted equal");
 
         myStringList.add("Hallo");
         mySecondStringList.add("Hallo");
 
         TestSuite.assertEquals(myStringList, mySecondStringList, "Two String Lists with same content not asserted equal");
     }
+
     /**
      * Test whether two obviously different lists are not equal
      */
@@ -158,20 +168,30 @@ public class TestMyList {
     /**
      * Test equals() for transitivity: if x.equals(y) and y.equals(z), then x.equals(z)
      */
-   /* public static void testEqualsTransitivity(){
+    public static void testEqualsTransitivity(){
         MyList<String> myStringList = new MyList<String>();
         MyList<String> mySecondStringList = new MyList<String>();
         MyList<String> myThirdStringList = new MyList<String>();
-        myStringList.add("Hallo");
-        mySecondStringList.add("Hallo");
-        mySecondStringList.add("Hallo");
 
-        System.out.println(mySecondStringList.equals(myThirdStringList));
+        boolean xEqualsY = myStringList.equals(mySecondStringList);
+        boolean yEqualsZ = mySecondStringList.equals(myThirdStringList);
+        boolean xEqualsZ = myStringList.equals(myThirdStringList);
 
-        //TestSuite.assertTrue(transitive, "Transitivity does not hold with three empty (=equal) String Lists");
+        boolean antecedent = xEqualsY && yEqualsZ;
+        boolean consequent = xEqualsZ;
+
+        boolean transitive = !antecedent || consequent; // Implication is true if: antecedent is false or consequent is true
+
+        TestSuite.assertTrue(transitive, "Transitivity does not hold with three empty (=equal) String Lists");
     }
-*/
 
-    // consistent: multiple times giving same result
+    /**
+     * Test equals() for consistency - multiple times calling equals() should give same result
+     */
+    public static void testEqualsConsistency(){
+        System.out.println("Test");
+    }
+
+
     // x.equals(null) == false
 }
