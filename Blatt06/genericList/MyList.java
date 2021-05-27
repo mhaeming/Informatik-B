@@ -112,10 +112,12 @@ public class MyList<T> implements Cloneable{
    }
 
    @Override
-   protected Object clone() {
+   protected MyList<T> clone() {
       try {
-         Object cloneObject = super.clone();
-         return cloneObject;
+         @SuppressWarnings("unchecked") MyList<T> clonedList = (MyList<T>) super.clone();
+         clonedList.begin = begin.clone();
+         clonedList.pos = clonedList.begin;
+         return clonedList;
       } catch (CloneNotSupportedException e) {
          e.printStackTrace();
          return null;
@@ -136,11 +138,11 @@ public class MyList<T> implements Cloneable{
       if (!begin.equals(other.begin))
          return false;
       while (!endpos()) {
-         advance();
-         other.advance();
          if (!elem().equals(other.elem())) {
             return false;
          }
+         advance();
+         other.advance();
       }
       return true;
    }

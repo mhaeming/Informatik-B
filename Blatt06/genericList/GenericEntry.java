@@ -6,7 +6,7 @@ package genericList;
  * 
  * @author Maximilian Häming, based on work by Mathias Menninghaus (mathias.menninghaus@uos.de)
  */
-class GenericEntry<T> {
+class GenericEntry<T> implements Cloneable{
 
    T o;
    GenericEntry<T> next;
@@ -22,6 +22,19 @@ class GenericEntry<T> {
    GenericEntry(T o, GenericEntry<T> e) {
       this.o = o;
       this.next = e;
+   }
+
+   @Override
+   protected GenericEntry<T> clone() {
+      try {
+         @SuppressWarnings("unchecked") GenericEntry<T> clonedEntry = (GenericEntry<T>) super.clone();
+         if (next != null)
+            clonedEntry.next = next.clone();
+         return clonedEntry;
+      } catch (CloneNotSupportedException e) {
+         e.printStackTrace();
+         return null;
+      }
    }
 
    @Override
