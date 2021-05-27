@@ -52,7 +52,7 @@ public class TimerObject {
 
         long end = System.nanoTime();
 
-        return (end - start) / tests;
+        return (end - start) / size;
     }
 
     public long timeContains() {
@@ -64,7 +64,7 @@ public class TimerObject {
 
         long end = System.nanoTime();
 
-        return (end - start) / tests;
+        return (end - start) / size;
     }
 
     public long timeRemoves() {
@@ -76,7 +76,7 @@ public class TimerObject {
 
         long end = System.nanoTime();
 
-        return (end - start) / tests;
+        return (end - start) / size;
     }
 
 }

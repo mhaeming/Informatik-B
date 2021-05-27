@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class JCFTest {
     public static void main(String[] args) {
         // Number of tests
-        int tests = 10000;
+        int tests = 1000;
 
         // How many objects should be put in the structure?
         int size = 10000;
