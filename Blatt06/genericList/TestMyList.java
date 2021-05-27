@@ -29,6 +29,7 @@ public class TestMyList {
         testEqualsSymmetry();
         testEqualsTransitivity();
         testEqualsConsistency();
+        testEqualsNull();
     }
 
     /**
@@ -83,8 +84,7 @@ public class TestMyList {
         myStringList.add("Hallo");
         myClonedStringList = (MyList<String>)myStringList.clone();
 
-        System.out.println(myStringList.equals(myClonedStringList));
-        //TestSuite.assertEquals(myStringList, myClonedStringList, "Non-empty cloned String List does not equal original");
+     //   TestSuite.assertEquals(myStringList, myClonedStringList, "Non-empty cloned String List does not equal original");
 
 
         // Test with Integer List
@@ -189,9 +189,36 @@ public class TestMyList {
      * Test equals() for consistency - multiple times calling equals() should give same result
      */
     public static void testEqualsConsistency(){
-        System.out.println("Test");
+        MyList<String> myStringList = new MyList<String>();
+        MyList<String> mySecondStringList = new MyList<String>();
+
+        boolean equal1 = myStringList.equals(mySecondStringList);
+        boolean equal2 = myStringList.equals(mySecondStringList);
+        boolean equal3 = myStringList.equals(mySecondStringList);
+
+        boolean allEqual = (equal1 == equal2) && (equal2 == equal3);
+
+        TestSuite.assertTrue(allEqual, "equals() not consistent for equal String Lists");
+
+        myStringList.add("Hallo");
+
+        equal1 = myStringList.equals(mySecondStringList);
+        equal2 = myStringList.equals(mySecondStringList);
+        equal3 = myStringList.equals(mySecondStringList);
+
+        allEqual = (equal1 == equal2) && (equal2 == equal3);
+
+        TestSuite.assertTrue(allEqual, "equals() not consistent for unequal String Lists");
     }
 
+    /**
+     * Test whether x.equals(null) == false
+     */
+    public static void testEqualsNull(){
+        MyList<Integer> myIntegerList = new MyList<Integer>();
 
-    // x.equals(null) == false
+        boolean equalsNull = myIntegerList.equals(null);
+
+        TestSuite.assertFalse(equalsNull, "Empty Integer List equals null-object");
+    }
 }
