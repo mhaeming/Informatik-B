@@ -1,7 +1,11 @@
 package genericList;
 
+import util.TestSuite;
+
 /**
  * Test class for the clone-method of MyList
+ *
+ * @author Per Starke
  */
 public class TestMyList {
 

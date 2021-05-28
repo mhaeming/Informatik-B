@@ -1,4 +1,4 @@
-package genericList;
+package util;
 
 public class TestSuite {
 
