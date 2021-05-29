@@ -1,6 +1,8 @@
 package heap;
 
 import java.util.Arrays;
+import java.util.Comparator;
+
 
 /**
  * Implements a typesafe min-heap.
@@ -24,7 +26,30 @@ public class Heap<T extends Comparable<T>> {
      */
     Object itemArray[] = new Object[capacity];
 
+    /**
+     * Did the heap get a comparator?
+     */
+    private boolean hasComparator = false;
 
+    /**
+     * The given java.util.Comparator. If null, use compareTo of comparable interface
+     */
+    private Comparator comparator = null;
+
+    /**
+     * Default constructor
+     */
+    public Heap(){
+
+    }
+
+    /**
+     * Constructor with given comparator
+     * @param comparator the given comparator
+     */
+    public Heap(Comparator comparator){
+        this.comparator = comparator;
+    }
 
 
 
@@ -134,7 +159,7 @@ public class Heap<T extends Comparable<T>> {
 
 
     /**
-     * Get the first element of the Heap.
+     * Get the first and therefore smallest element of the Heap.
      * Throws an exception if the Heap is empty.
      * @return the first element of the Heap, of Type T.
      */
@@ -146,7 +171,7 @@ public class Heap<T extends Comparable<T>> {
     }
 
     /**
-     * Get the first elemet of the Heap, and then remove it.
+     * Get the first and therefore smallest element of the Heap, and then remove it.
      * Throws an exception if the Heap is empty.
      * @return the first element of the Heap, of Type T.
      */
@@ -180,16 +205,13 @@ public class Heap<T extends Comparable<T>> {
         int index = 0;
         while(hasLeftChild(index)){
             int indexOfSmallerChild = getIndexLeftChild(index);
-            if (hasRightChild(index) && rightChild(index).compareTo(leftChild(index)) < 0){
+            if (hasRightChild(index) && myCompare(rightChild(index), leftChild(index)) < 0){
                 indexOfSmallerChild = getIndexRightChild(index);
             }
 
             T elem = (T) itemArray[index];
             T smallerChild = (T) itemArray[indexOfSmallerChild];
-            if(elem.compareTo(smallerChild) < 0){
-                break;
-            }
-            else {
+            if(myCompare(elem, smallerChild) > 0){
                 swap(index, indexOfSmallerChild);
             }
             index = indexOfSmallerChild;
@@ -201,11 +223,37 @@ public class Heap<T extends Comparable<T>> {
      */
     public void heapifyAdd(){
         int index = size-1;
-        while(hasParent(index) && parent(index).compareTo((T)itemArray[index]) > 0){
+        while(hasParent(index) && myCompare(parent(index),(T)itemArray[index]) > 0){
             swap(getIndexParent(index), index);
             index = getIndexParent(index);
         }
     }
 
+
+    /**
+     * Compare two elements in the Heap.
+     * Use comparator, if one was provided during construction, else use compareTo of the elements
+     * @param elemOne the first element
+     * @param elemTwo the second element
+     * @return the result of the comparator, or: number < 0 if elemOne is smaller, 0 if both are equal, a number > 0 otherwise
+     */
+    private int myCompare(T elemOne, T elemTwo){
+        if (this.hasComparator){ // Comparator is given
+            return comparator.compare(elemOne, elemTwo);
+        }
+        else{ // Elements are comparable
+            return elemOne.compareTo(elemTwo);
+        }
+    }
+
+
+
+    public void printHeap(){
+        for(Object elem: itemArray){
+            if (elem != null){
+                System.out.println(elem);
+            }
+        }
+    }
 
 }

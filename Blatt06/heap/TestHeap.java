@@ -2,6 +2,7 @@ package heap;
 
 import util.TestSuite;
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  * Test class for the Heap
@@ -26,7 +27,24 @@ public class TestHeap {
         testAdd();
         testGetFirstElemet();
         testGetAndRemoveFirstElement();
+        testComparator();
+        //testMitMaddad();
     }
+
+    private static void testComparator(){
+        Heap<Integer> heap = new Heap<Integer>(new MyIntComparator());
+        initalizeMyHeapWithSomeValues(heap);
+        int number = heap.getAndRemoveFirstElement();
+        heap.printHeap();
+
+    }
+
+    private static void testMitMaddad() {
+        Heap<Integer> heap = new Heap<Integer>();
+        initalizeMyHeapWithSomeValues(heap);
+        int number = heap.getAndRemoveFirstElement();
+    }
+
 
     /**
      * Test whether after adding a few elements, the Heap correctly obeyes the Heap-rules
@@ -115,4 +133,15 @@ public class TestHeap {
 
     }
 
+    private static void initalizeMyHeapWithSomeValues(Heap<Integer> heap) {
+        heap.add(10);
+        heap.add(2);
+        heap.add(7);
+        heap.add(9);
+        heap.add(1);
+        heap.add(4);
+        heap.add(5);
+        heap.add(12);
+        heap.add(8);
+    }
 }
