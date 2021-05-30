@@ -86,6 +86,16 @@ public class TestHeap {
     private static void testGetFirstElemet(){
         Heap<Integer> heap = new Heap<Integer>();
 
+        boolean exception = false;
+        try{
+            int firstElem = heap.getFirstElememt();
+        } catch (IllegalStateException e){
+            exception = true;
+        } finally {
+            TestSuite.assertTrue(exception, "Getting the first element of an empty heap should throw" +
+                    "an exception");
+        }
+
         heap.add(42);
         int firstElem = heap.getFirstElememt();
         String err = ("The first element should be 42, but is " + firstElem);
@@ -107,6 +117,16 @@ public class TestHeap {
      */
     private static void testGetAndRemoveFirstElement(){
         Heap<Integer> heap = new Heap<Integer>();
+
+        boolean exception = false;
+        try{
+            int firstElem = heap.getAndRemoveFirstElement();
+        } catch (IllegalStateException e){
+            exception = true;
+        } finally {
+            TestSuite.assertTrue(exception, "Getting the first element of an empty heap should throw" +
+                    "an exception");
+        }
 
         heap.add(16);
         heap.add(42);

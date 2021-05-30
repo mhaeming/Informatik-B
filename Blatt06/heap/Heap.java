@@ -204,17 +204,22 @@ public class Heap<T extends Comparable<T>> {
      */
     public void heapifyRemove(){
         int index = 0;
+
         while(hasLeftChild(index)){
+            // Get the smallest child and its index
             int indexOfSmallerChild = getIndexLeftChild(index);
             if (hasRightChild(index) && myCompare(rightChild(index), leftChild(index)) < 0){
                 indexOfSmallerChild = getIndexRightChild(index);
             }
-
             T elem = (T) itemArray[index];
             T smallerChild = (T) itemArray[indexOfSmallerChild];
+
+            // If the heap-rule is not obeyed, swap items
             if(myCompare(elem, smallerChild) > 0){
                 swap(index, indexOfSmallerChild);
             }
+
+            // Go one level down and repeat
             index = indexOfSmallerChild;
         }
     }
