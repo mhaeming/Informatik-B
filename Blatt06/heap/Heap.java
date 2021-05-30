@@ -24,7 +24,7 @@ public class Heap<T extends Comparable<T>> {
     /**
      * The array that represents the Heap.
      */
-    Object itemArray[] = new Object[capacity];
+    private Object itemArray[] = new Object[capacity];
 
     /**
      * Did the heap get a comparator?
@@ -49,6 +49,7 @@ public class Heap<T extends Comparable<T>> {
      */
     public Heap(Comparator comparator){
         this.comparator = comparator;
+        this.hasComparator = true;
     }
 
 
@@ -247,13 +248,31 @@ public class Heap<T extends Comparable<T>> {
     }
 
 
-
+    /**
+     * Prints the array representing the heap
+     */
     public void printHeap(){
         for(Object elem: itemArray){
             if (elem != null){
                 System.out.println(elem);
             }
         }
+    }
+
+    /**
+     * Get the item array
+     * @return item array
+     */
+    public Object[] getItemArray(){
+        return this.itemArray;
+    }
+
+    /**
+     * Get the capacity
+     * @return capacity, as int
+     */
+    public int getCapacity(){
+        return this.capacity;
     }
 
 }

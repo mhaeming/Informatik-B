@@ -1,4 +1,4 @@
-package heap;
+package util;
 import java.util.Comparator;
 
 /**
