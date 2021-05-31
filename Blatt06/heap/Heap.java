@@ -70,7 +70,7 @@ public class Heap<T extends Comparable<T>> {
      * @return the right childs index, as Integer.
      */
     private int getIndexRightChild(int indexParent){
-        return (2* indexParent) + 2;
+        return (2 * indexParent) + 2;
     }
 
     /**
@@ -180,7 +180,7 @@ public class Heap<T extends Comparable<T>> {
         if(size == 0){
             throw new IllegalStateException("There is no first element, because the Heap is empty!");
         }
-        T elem = (T) itemArray[0];
+        T elem = getFirstElememt();
         itemArray[0] = itemArray[size-1];
         itemArray[size-1] = null;
         size--;

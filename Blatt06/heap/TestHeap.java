@@ -88,7 +88,7 @@ public class TestHeap {
 
         boolean exception = false;
         try{
-            int firstElem = heap.getFirstElememt();
+            heap.getFirstElememt();
         } catch (IllegalStateException e){
             exception = true;
         } finally {
@@ -120,7 +120,7 @@ public class TestHeap {
 
         boolean exception = false;
         try{
-            int firstElem = heap.getAndRemoveFirstElement();
+            heap.getAndRemoveFirstElement();
         } catch (IllegalStateException e){
             exception = true;
         } finally {
@@ -183,8 +183,9 @@ public class TestHeap {
         Heap<Integer> heap = new Heap<Integer>(new MyIntComparator());
         Object[] correctArray = initalizeMyHeapWithSomeValues(heap);
 
-        int number = heap.getAndRemoveFirstElement();
-        number = heap.getAndRemoveFirstElement();
+        // Remove the first two elements
+        heap.getAndRemoveFirstElement();
+        heap.getAndRemoveFirstElement();
 
         correctArray[0] = 4;
         correctArray[1] = 8;
