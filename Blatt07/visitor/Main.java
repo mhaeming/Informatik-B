@@ -11,8 +11,13 @@ public class Main {
         }
 
         Visitor<Integer> visitor = new PrintListVisitor<Integer>();
+        Visitor<Integer> visitor2 = new PrintListVisitor2<Integer>();
 
+        System.out.println("Visiting all elements:");
         myIntList.accept(visitor);
+
+        System.out.println("\nVisiting list with termination condition:");
+        myIntList.accept(visitor2);
 
 
     }

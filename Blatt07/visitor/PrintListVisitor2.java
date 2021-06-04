@@ -1,13 +1,13 @@
 package visitor;
 
 /**
- * A visitor that visits all elements of the list
+ * A visitor with termination condition
  * @param <E>
  */
-public class PrintListVisitor<E> implements Visitor<E>{
+public class PrintListVisitor2<E> implements Visitor<E>{
 
     /**
-     * Visits all the elements of the list it is called on
+     * Visits the elements of the list it is called on, stopping if one element is 42
      * @param o
      *           the element that has just been visited by
      *           {@link Visitable#accept(Visitor)}
@@ -16,6 +16,11 @@ public class PrintListVisitor<E> implements Visitor<E>{
     @Override
     public boolean visit(Object o) {
         System.out.println(o);
+
+        // termination condition
+        if(o.equals(42)){
+            return false;
+        }
 
         return true;
     }
