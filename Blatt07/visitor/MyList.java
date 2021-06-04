@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
  * @author Lars Huning
  * 
  */
-public class MyList<E> implements Cloneable {
+public class MyList<E> implements Cloneable, Visitable<E> {
 
 	/**
 	 * Reference on the first Entry of this List
@@ -157,4 +157,23 @@ public class MyList<E> implements Cloneable {
 		return true;
 	}
 
+	/**
+	 * calls the visit method of the visitor for each element in the list
+	 * while the visitor returns true for the visited element,
+	 * meaning the visitor "wants to continue visiting"
+	 * @param v the Visitor which should be called for every element in this
+	 */
+	@Override
+	public void accept(Visitor<E> v) {
+		// Go back to first element
+		reset();
+		boolean continueVisiting = true;
+
+		// Visit each element while not at the end of the list and while visitor allows further visiting
+		while(!endpos() && continueVisiting){
+			continueVisiting = v.visit(pos.next.o);
+			advance();
+		}
+
+	}
 }
