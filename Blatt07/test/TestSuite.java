@@ -1,5 +1,7 @@
 package test;
 
+import visitor.MyList;
+
 public class TestSuite {
 
     private static int errors;
@@ -58,6 +60,28 @@ public class TestSuite {
         }
         countTest();
     }
+
+    // MyLists
+    public static <T> void assertEquals(MyList<T> expected, MyList<T> actual, String errMsg) {
+        countTest();
+
+        expected.reset();
+        actual.reset();
+
+        while (!expected.endpos()) {
+            if (expected.endpos() != actual.endpos()) {
+                throw new IndexOutOfBoundsException("Lists are not of equal length!");
+            }
+
+            if (!expected.elem().equals(actual.elem())) {
+                System.out.println("ASSERTION ERROR: expected " + expected.elem() + " but received " + actual.elem() + " Details: " + errMsg);
+                countError();
+            }
+            expected.advance();
+            actual.advance();
+        }
+    }
+
 
     // True
     public static void assertTrue(boolean actual, String errMsg) {
