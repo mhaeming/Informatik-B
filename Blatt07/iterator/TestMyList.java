@@ -49,7 +49,7 @@ public class TestMyList {
         }
 
         // The second list should now be a copy of the first, and therefore equal to it
-        TestSuite.assertTrue(myList.equals(mySecondList), "Iterator did not run " +
+        TestSuite.assertEquals(myList, mySecondList, "Iterator did not run " +
                 "through all elements in the correct order");
     }
 
@@ -71,7 +71,7 @@ public class TestMyList {
 
         mySecondList.delete();
 
-        TestSuite.assertTrue(myList.equals(mySecondList), "Iterator did not correctly" +
+        TestSuite.assertEquals(myList, mySecondList, "Iterator did not correctly" +
                 "remove the first element");
 
 
@@ -85,8 +85,20 @@ public class TestMyList {
         myListIterator.remove();
         mySecondList.delete();
 
-        TestSuite.assertTrue(myList.equals(mySecondList), "Iterator did not correctly" +
+        TestSuite.assertEquals(myList, mySecondList, "Iterator did not correctly" +
                 "remove an element after iterating a few steps");
+
+
+        // Remove all elements
+        myListIterator = myList.iterator();
+        myListIterator.next();
+        while(myListIterator.hasNext()){
+            myListIterator.remove();
+            myListIterator.next();
+        }
+        myListIterator.remove();
+
+        TestSuite.assertEquals(myList, new MyList<Integer>(), "Iterator did not remove all elements");
     }
 
     /**
