@@ -1,6 +1,7 @@
 package iterator;
 
 import java.util.NoSuchElementException;
+import java.util.Iterator;
 
 /**
  * A simple linked list. One may go through this list by {@link #advance()}
@@ -11,7 +12,7 @@ import java.util.NoSuchElementException;
  * @author Lars Huning
  * 
  */
-public class MyList<E> implements Cloneable {
+public class MyList<E> implements Cloneable, Iterable<E> {
 
 	/**
 	 * Reference on the first Entry of this List
@@ -23,10 +24,16 @@ public class MyList<E> implements Cloneable {
 	private MyEntry<E> pos;
 
 	/**
+	 * Count modifications to ensure fail fast iterator
+	 */
+	private int modCount;
+
+	/**
 	 * Create a new empty List.
 	 */
 	public MyList() {
 		pos = begin = new MyEntry<E>();
+		modCount = 0;
 	}
 
 	/**
@@ -94,6 +101,7 @@ public class MyList<E> implements Cloneable {
 	 *           the element to be inserted
 	 */
 	public void add(E x) {
+		increaseModCount();
 		MyEntry<E> newone = new MyEntry<E>(x, pos.next);
 
 		pos.next = newone;
@@ -107,6 +115,7 @@ public class MyList<E> implements Cloneable {
 	 *            if the last Entry of this List already has been reached.
 	 */
 	public void delete() {
+		increaseModCount();
 		if (endpos()) {
 			throw new NoSuchElementException("Already at the end of this List");
 		}
@@ -157,4 +166,20 @@ public class MyList<E> implements Cloneable {
 		return true;
 	}
 
+	public Iterator<E> iterator() {
+		return new MyListIterator<>(this, this.begin);
+	}
+
+
+	void increaseModCount() {
+		if (modCount == Integer.MAX_VALUE) {
+			modCount = 0;
+		} else {
+			modCount++;
+		}
+	}
+
+	public int getModCount() {
+		return modCount;
+	}
 }
