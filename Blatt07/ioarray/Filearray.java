@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * 
@@ -118,5 +119,19 @@ public class Filearray implements AutoCloseable{
      */
     public void close() throws IOException{
         this.file.close();
+    }
+
+    /**
+     * @return name of this filearray
+     */
+    public String getName(){
+        return this.name;
+    }
+
+    /**
+     * @return the file of this filearray
+     */
+    public RandomAccessFile getFile(){
+        return this.file;
     }
 }
