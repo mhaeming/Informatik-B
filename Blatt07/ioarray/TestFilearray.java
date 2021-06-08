@@ -3,7 +3,6 @@ package ioarray;
 import test.TestSuite;
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.util.Arrays;
 
 /**
@@ -146,19 +145,9 @@ public class TestFilearray {
      */
     private static void testClose(){
         try (Filearray fa = new Filearray("Test", INTS)){
-            RandomAccessFile file = fa.getFile();
+            TestSuite.assertFalse(fa.isClosed(), "File is closed before closing it");
             fa.close();
-
-            // If we can read from the file, it is not closed
-            boolean closed = false;
-            try{
-                file.read();
-            } catch(IOException e){
-                closed = true;
-            } finally{
-                TestSuite.assertTrue(closed, "After using close(), we can still read from the file");
-            }
-
+            TestSuite.assertTrue(fa.isClosed(), "file is not closed after closing it");
         } catch (IOException e){}
     }
 

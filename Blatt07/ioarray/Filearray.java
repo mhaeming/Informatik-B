@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Arrays;
-import java.util.Random;
 
 /**
  * 
@@ -129,9 +128,16 @@ public class Filearray implements AutoCloseable{
     }
 
     /**
-     * @return the file of this filearray
+     * Is the file for this filearray closed?
+     * @return true if the file is closed, false otherwise
      */
-    public RandomAccessFile getFile(){
-        return this.file;
+    public boolean isClosed(){
+        try{
+            file.read();
+            return false;
+        } catch(IOException e){
+            return true;
+        }
     }
+
 }
