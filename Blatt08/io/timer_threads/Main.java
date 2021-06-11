@@ -5,6 +5,9 @@ import java.util.Timer;
 
 /**
  * Uses MyTimerTask to watch size-changes of a given file every second
+ *
+ * For example, "testfile.txt" or "testdirectory" can be used, they already exist and can be used for testing.
+ * But also, any other filename can be used, if it does not exist, then a new file with this name will be created.
  */
 public class Main {
 
