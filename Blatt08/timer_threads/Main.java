@@ -27,6 +27,13 @@ public class Main {
             File file = new File(args[0]);
             Timer timer = new Timer();
             timer.schedule(new MyTimerTask(file), 1000, 1000);
+
+            if(file.listFiles() != null){
+                System.out.println("Directory " + args[0] + " is watched now.");
+            } else{
+                System.out.println("File " + args[0] + " is watched now.");
+            }
+
         }
     }
 

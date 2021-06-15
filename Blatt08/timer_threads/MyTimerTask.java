@@ -19,6 +19,11 @@ public class MyTimerTask extends TimerTask {
      */
     private long size;
 
+    /**
+     * The size before a change
+     */
+    private long oldSize;
+
 
     /**
      * Constructor, sets this file to the given file.
@@ -28,9 +33,10 @@ public class MyTimerTask extends TimerTask {
     public MyTimerTask(File file){
         this.file = file;
         if (this.file.exists()){
-            System.out.println("File exists");
+            System.out.println("Exists!");
             size = getFolderSize(file);
-        } else{
+            oldSize = size;
+        } else {
             try {
                 System.out.println("File does not exist");
                 file.createNewFile();
@@ -39,6 +45,7 @@ public class MyTimerTask extends TimerTask {
                 System.err.println("File could not be created");
             }
         }
+
     }
 
 
@@ -48,7 +55,7 @@ public class MyTimerTask extends TimerTask {
     @Override
     public void run() {
         if(sizeChanged()){
-            System.out.println(size);
+            System.out.println("Size: " + size + "B, size before: " + oldSize + "B");
         }
     }
 
@@ -81,7 +88,7 @@ public class MyTimerTask extends TimerTask {
      */
     private boolean sizeChanged(){
         long newSize = MyTimerTask.getFolderSize(this.file);
-        long oldSize = this.size;
+        this.oldSize = this.size;
 
         this.size = newSize;
 
