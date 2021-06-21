@@ -1,6 +1,10 @@
 package lock.util;
 
 import java.util.NoSuchElementException;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
  * An implementation of a Queue with a limited capacity.
@@ -10,6 +14,12 @@ import java.util.NoSuchElementException;
  * @param <E>
  */
 public class Queue<E> {
+
+	private final ReadWriteLock rwlock = new ReentrantReadWriteLock();
+	private final Lock rLock = rwlock.readLock();
+	private final Lock wLock = rwlock.writeLock();
+	private final Condition cond = wLock.newCondition();
+
 
 	/**
 	 * Holds the objects stored by this {@code Queue}.
@@ -39,35 +49,47 @@ public class Queue<E> {
 	 * 
 	 * @param o
 	 *            object to be inserted
+	 * @throws InterruptedException
 	 * 
 	 * @throws RuntimeException
 	 *             if this {@code Queue} is already full
 	 */
-	public void enq(E o) {
-
-		if (this.full()) {
-			throw new RuntimeException("queue is full");
+	public void enq(E o) throws InterruptedException {
+		try {
+			wLock.lock();
+			while(this.full()) {
+				cond.await();
+			}
+			objects[(first + size) % objects.length] = o;
+			size++;
+		} finally {
+			cond.signalAll();
+			wLock.unlock();
 		}
-		objects[(first + size) % objects.length] = o;
-		size++;
 	}
 
 	/**
 	 * Removes the object at the first position of this {@code Queue}.
 	 * 
 	 * @return the removed object
+	 * @throws InterruptedException
 	 * @throws NoSuchElementException
 	 *             if this {@code Queue} is already empty
 	 */
-	public E deq() {
-		if (this.empty()) {
-			throw new NoSuchElementException();
+	public E deq() throws InterruptedException {
+		try {
+			wLock.lock();
+			while(this.empty()) {
+				cond.await();
+			}
+			E o = (E) objects[first];
+			first = (first + 1) % objects.length;
+			size--;
+			return o;
+		} finally {
+			cond.signalAll();
+			wLock.unlock();
 		}
-
-		E o = (E) objects[first];
-		first = (first + 1) % objects.length;
-		size--;
-		return o;
 	}
 
 	/**
@@ -78,10 +100,16 @@ public class Queue<E> {
 	 *             if this {@code Queue} is already empty
 	 */
 	public E front() {
-		if (this.empty()) {
-			throw new NoSuchElementException();
+		try {
+			rLock.lock();
+			if (this.empty()) {
+				throw new NoSuchElementException();
+			}
+			return (E) objects[first];
+		} finally {
+			rLock.unlock();
 		}
-		return (E) objects[first];
+
 	}
 
 	/**
@@ -89,7 +117,12 @@ public class Queue<E> {
 	 * @return {@code true} if this {@code Queue} is empty
 	 */
 	public boolean empty() {
-		return this.size == 0;
+		try {
+			rLock.lock();
+			return this.size == 0;
+		} finally {
+			rLock.unlock();
+		}
 	}
 
 	/**
@@ -97,7 +130,12 @@ public class Queue<E> {
 	 * @return {@code true} if this {@code Queue} is full
 	 */
 	public boolean full() {
-		return this.size == objects.length;
+		try {
+			rLock.lock();
+			return this.size == objects.length;
+		} finally {
+			rLock.unlock();
+		}
 	}
 
 }

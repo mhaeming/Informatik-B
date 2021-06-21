@@ -22,9 +22,14 @@ public class Sleeper extends Thread {
          while (true) {
             long value;
 
-            value = values.deq();
-            System.out.println("Now sleeping for " + value + " ms");
-
+            synchronized(values) {
+               while (this.values.empty()) {
+                  values.wait();
+               }
+               value = values.deq();
+               values.notifyAll();
+               System.out.println("Now sleeping for " + value + " ms");
+            }
             this.sleep(value);
 
          }

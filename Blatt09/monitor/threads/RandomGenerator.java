@@ -28,9 +28,15 @@ public class RandomGenerator extends Thread {
 
 				long random;
 
-				random = (long) (Math.random() * (double) MAX_VALUE);
-				System.out.println("Now putting " + random);
-				randoms.enq(random);
+				synchronized(this.randoms) {
+					while (this.randoms.full()) {
+						randoms.wait();
+					}
+					random = (long) (Math.random() * (double) MAX_VALUE);
+					System.out.println("Now putting " + random);
+					randoms.enq(random);
+					randoms.notifyAll();
+				}
 
 				this.sleep(SLEEP_TIME);
 
