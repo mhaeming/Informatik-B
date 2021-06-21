@@ -1,6 +1,6 @@
-package threads;
+package lock.threads;
 
-import util.Queue;
+import lock.util.Queue;
 
 /**
  * Runs a {@link Sleeper} and a {@link RandomGenerator} with the same

@@ -1,4 +1,4 @@
-package util;
+package lock.util;
 
 import java.util.NoSuchElementException;
 

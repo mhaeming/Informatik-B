@@ -1,6 +1,6 @@
-package threads;
+package lock.threads;
 
-import util.Queue;
+import lock.util.Queue;
 
 /**
  * A simple {@code Thread} which continuously writes uniformly distribute random

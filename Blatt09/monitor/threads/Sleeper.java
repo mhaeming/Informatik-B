@@ -1,6 +1,6 @@
-package threads;
+package monitor.threads;
 
-import util.Queue;
+import monitor.util.Queue;
 
 /**
  * Simple {@code Thread} which continuously reads random values from the given
