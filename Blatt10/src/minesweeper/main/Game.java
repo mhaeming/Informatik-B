@@ -13,7 +13,7 @@ public class Game {
     public static void main(String[] args){
         JFrame frame = new JFrame("MineSweeper");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Board model = new Board(6, 4, 8);
+        Board model = new Board(6, 4, 1);
         PlayingField view = new PlayingField(model);
         frame.setContentPane(view);
         frame.pack();

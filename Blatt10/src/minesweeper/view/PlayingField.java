@@ -78,13 +78,18 @@ public class PlayingField extends JPanel implements Observer {
         // Check for all fields if they are revealed or flagged
         for (int x = 0; x < model.getHeight(); x++) {
             for (int y = 0; y < model.getWidth(); y++) {
-                System.out.format("Checking: %d / %d \n", x, y);
                 Field fieldToCheck = model.getField(x, y);
                 if (fieldToCheck.isRevealed()) {
                     this.reveal(x, y);
                     for (Field neighbor: fieldToCheck.getNeighbors()){
                         Integer nearBombs = neighbor.getNearBombs();
-                        buttons[neighbor.getX()][neighbor.getY()].setText(nearBombs.toString());
+                        //buttons[neighbor.getX()][neighbor.getY()].setText(nearBombs.toString());
+                        int neighborX = neighbor.getX();
+                        int neighborY = neighbor.getY();
+
+                        System.out.format("x: %d, y: %d \n", neighborX, neighborY);
+                        buttons[neighborX][neighborY].setText("Hi");
+
                     }
                 }
                 if (fieldToCheck.isFlagged()) {

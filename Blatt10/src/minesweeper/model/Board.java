@@ -72,7 +72,6 @@ public class Board extends Observable{
 
     public Field getField(int x, int y) {
         if (x < 0 || x >= this.fields.length || y < 0 || y >= this.fields[0].length) {
-            System.out.format("x: %d, y: %d, height: %d, width: %d \n", x, y, fields.length, fields[0].length);
             return null;
         }
         return this.fields[x][y];
