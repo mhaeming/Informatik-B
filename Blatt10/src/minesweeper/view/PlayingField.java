@@ -82,6 +82,9 @@ public class PlayingField extends JPanel implements Observer {
                 Field fieldToCheck = model.getField(x, y);
                 if (fieldToCheck.isRevealed()) {
                     this.reveal(x, y);
+                    for (Field neighbor: fieldToCheck.getNeighbors()){
+                        
+                    }
                 }
                 if (fieldToCheck.isFlagged()) {
                     this.flag(x, y);

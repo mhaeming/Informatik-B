@@ -69,11 +69,11 @@ public class Field extends Observable{
 
             this.revealed = true;
             // reveal all surrounding fields if there is no bomb
-            if (!this.hasBomb && nearBombs == 0) {
-                for (Field field : neighbors) {
-                    field.reveal();
-                }
-            }
+//            if (!this.hasBomb && nearBombs == 0) {
+//                for (Field field : neighbors) {
+//                    field.reveal();
+//                }
+//            }
             this.board.revealedField(this);
             this.setChanged();
             this.notifyObservers();
