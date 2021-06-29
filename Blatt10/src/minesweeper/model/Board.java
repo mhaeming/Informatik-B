@@ -47,14 +47,14 @@ public class Board extends Observable{
                 bombsToPlace--;
             }
         }
-        
+
         /**
          * Setup the remaining fields
          */
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 if (fields[i][j] == null) {
-                    fields[i][j] = new Field(i, j, false, this); 
+                    fields[i][j] = new Field(i, j, false, this);
                 }
             }
         }
@@ -70,10 +70,11 @@ public class Board extends Observable{
     }
 
     public Field getField(int x, int y) {
-        if (y < 0 || y >= this.fields.length || x < 0 || x >= this.fields[0].length) {
+        if (x < 0 || x >= this.fields.length || y < 0 || y >= this.fields[0].length) {
+            System.out.format("x: %d, y: %d, height: %d, width: %d \n", x, y, fields.length, fields[0].length);
             return null;
         }
-        return this.fields[y][x];
+        return this.fields[x][y];
     }
 
     /**
@@ -112,9 +113,9 @@ public class Board extends Observable{
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[0].length; j++) {
                 if (fields[i][j].hasBomb()) {
-                    System.out.print("[x]");  
+                    System.out.print("[x]");
                 } else {
-                    System.out.print("[ ]");  
+                    System.out.print("[ ]");
                 }
             }
             System.out.println();
@@ -127,11 +128,11 @@ public class Board extends Observable{
 
     public int getWidth() {
         return this.fields[0].length;
-        
+
     }
 
     public int getHeight() {
         return this.fields.length;
     }
-    
+
 }
