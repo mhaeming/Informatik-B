@@ -1,6 +1,5 @@
 package minesweeper.model;
 
-import javax.swing.*;
 import java.util.Random;
 
 import java.util.Observable; @SuppressWarnings("deprecation")
@@ -14,6 +13,8 @@ public class Board extends Observable{
     private int bombs;
     private int flags;
     private int revealed;
+
+    private int gamestate = 0;
 
     public Board(int width, int height, int bombs) {
 
@@ -87,11 +88,9 @@ public class Board extends Observable{
         this.revealed++;
 
         if (f.hasBomb()) {
-            JOptionPane.showMessageDialog(null, "BOOM, a bomb exploded. You lost!");
-            System.exit(0);
+            this.gamestate = -1;
         } else if (this.revealed + this.bombs == this.fields[0].length * this.fields.length) {
-            JOptionPane.showMessageDialog(null, "You won!!");
-            System.exit(0);
+            gamestate = 1;
         }
 
         this.setChanged();
@@ -136,6 +135,10 @@ public class Board extends Observable{
 
     public int getHeight() {
         return this.fields.length;
+    }
+
+    public int getGameState() {
+        return this.gamestate;
     }
 
 }

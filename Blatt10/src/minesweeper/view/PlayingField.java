@@ -92,6 +92,14 @@ public class PlayingField extends JPanel implements Observer {
                 } else{
                     this.unflag(x, y);
                 }
+
+                if (model.getGameState() == 1) {
+                    JOptionPane.showMessageDialog(null, "You won!!");
+                    System.exit(0);
+                } else if (model.getGameState() == -1){
+                    JOptionPane.showMessageDialog(null, "BOOM, a bomb exploded. You lost!");
+                    System.exit(0);
+                }
             }
         }
     }
