@@ -37,6 +37,14 @@ public class Field extends Observable{
     }
 
 
+    public int getX(){
+        return this.x;
+    }
+
+    public int getY(){
+        return this.y;
+    }
+
     public boolean hasBomb() {
         return this.hasBomb;
     }

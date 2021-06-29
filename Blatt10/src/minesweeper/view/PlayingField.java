@@ -83,7 +83,8 @@ public class PlayingField extends JPanel implements Observer {
                 if (fieldToCheck.isRevealed()) {
                     this.reveal(x, y);
                     for (Field neighbor: fieldToCheck.getNeighbors()){
-                        
+                        Integer nearBombs = neighbor.getNearBombs();
+                        buttons[neighbor.getX()][neighbor.getY()].setText(nearBombs.toString());
                     }
                 }
                 if (fieldToCheck.isFlagged()) {

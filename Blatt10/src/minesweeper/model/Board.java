@@ -1,5 +1,6 @@
 package minesweeper.model;
 
+import javax.swing.*;
 import java.util.Random;
 
 import java.util.Observable; @SuppressWarnings("deprecation")
@@ -86,9 +87,11 @@ public class Board extends Observable{
         this.revealed++;
 
         if (f.hasBomb()) {
-            // TODO: Game Over
+            JOptionPane.showMessageDialog(null, "BOOM, a bomb exploded. You lost!");
+            System.exit(0);
         } else if (this.revealed + this.bombs == this.fields[0].length * this.fields.length) {
-            // TODO: Won!
+            JOptionPane.showMessageDialog(null, "You won!!");
+            System.exit(0);
         }
 
         this.setChanged();
