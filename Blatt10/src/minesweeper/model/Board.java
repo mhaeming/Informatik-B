@@ -76,6 +76,38 @@ public class Board extends Observable{
         return this.fields[y][x];
     }
 
+    /**
+     * Buttom up notification that a field has been revealed
+     * Check for win or lose condtion
+     * @param f the notifying field
+     */
+    public void revealedField(Field f) {
+        this.revealed++;
+
+        if (f.hasBomb()) {
+            // TODO: Game Over
+        } else if (this.revealed + this.bombs == this.fields[0].length * this.fields.length) {
+            // TODO: Won!
+        }
+
+        this.setChanged();
+        this.notifyObservers();
+    }
+
+    /**
+     * Bottom up notification that a field has been flagged or unflagged
+     * @param f The notifying field
+     */
+    public void switchedFlag(Field f) {
+        if (f.isFlagged()) {
+            flags++;
+        } else {
+            flags--;
+        }
+        this.setChanged();
+        this.notifyObservers();
+    }
+
     public void print() {
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[0].length; j++) {

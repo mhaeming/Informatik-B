@@ -63,11 +63,18 @@ public class Field extends Observable{
     public void reveal() {
         if (!this.revealed) {
             
-            this.revealed = true;
-            if (this.hasBomb) {
-                //TODO: GameOver
+            if (flagged) {
+                return;
             }
 
+            this.revealed = true;
+            // reveal all surrounding fields if there is no bomb
+            if (!this.hasBomb && nearBombs == 0) {
+                for (Field field : neighbors) {
+                    field.reveal();
+                }
+            }
+            this.board.revealedField(this);
             this.setChanged();
             this.notifyObservers();
 
@@ -79,6 +86,7 @@ public class Field extends Observable{
      */
     public void toggleFlag() {
         this.flagged = !this.flagged;
+        this.board.switchedFlag(this);
         this.setChanged();
         this.notifyObservers();
     }
