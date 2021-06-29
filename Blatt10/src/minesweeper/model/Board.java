@@ -92,5 +92,14 @@ public class Board extends Observable{
     public int getTotalBombs() {
         return this.bombs;
     }
+
+    public int getWidth() {
+        return this.fields[0].length;
+        
+    }
+
+    public int getHeight() {
+        return this.fields.length;
+    }
     
 }

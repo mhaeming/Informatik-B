@@ -1,24 +1,24 @@
 package minesweeper.view;
 
-import minesweeper.model.GameRules;
+import minesweeper.model.Board;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Observable;
-import java.util.Observer;
+import java.util.Observer; @SuppressWarnings("deprecation")
 
 /**
  * The gui / playing field of the minesweeper game
  */
 public class PlayingField extends JPanel implements Observer {
 
-    private GameRules model;
+    private Board model;
 
     private JPanel field;
 
     private JLabel bombsToFind;
 
-    public PlayingField(GameRules model) {
+    public PlayingField(Board model) {
         // Fit the window size to the number of rows and cols
         this.setPreferredSize(new Dimension(model.getWidth()*80, model.getHeight()*80));
 
@@ -27,7 +27,7 @@ public class PlayingField extends JPanel implements Observer {
         model.addObserver(this);
 
         // Bombs to find, will be text on top
-        bombsToFind = new JLabel("Bombs to find: " + this.model.getBombsToFind());
+        bombsToFind = new JLabel("Bombs to find: " + this.model.getTotalBombs());
         bombsToFind.setPreferredSize(new Dimension(model.getWidth()*80, 30));
 
         // The actual field is a grid
