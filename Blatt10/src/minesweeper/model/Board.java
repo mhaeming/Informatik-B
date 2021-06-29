@@ -88,5 +88,9 @@ public class Board extends Observable{
             System.out.println();
         }
     }
+
+    public int getTotalBombs() {
+        return this.bombs;
+    }
     
 }
