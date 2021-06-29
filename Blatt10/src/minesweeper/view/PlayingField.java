@@ -83,15 +83,18 @@ public class PlayingField extends JPanel implements Observer {
                     this.reveal(x, y);
                     for (Field neighbor: fieldToCheck.getNeighbors()){
                         Integer nearBombs = neighbor.getNearBombs();
-                        //buttons[neighbor.getX()][neighbor.getY()].setText(nearBombs.toString());
                         int neighborX = neighbor.getX();
                         int neighborY = neighbor.getY();
 
+                        // For debugging, print x and y of the neighbor, so we know which one's have been visited
                         System.out.format("x: %d, y: %d \n", neighborX, neighborY);
-                        buttons[neighborX][neighborY].setText("Hi");
 
+                        if(!neighbor.isRevealed()) {
+                            buttons[neighborX][neighborY].setText(nearBombs.toString());
+                        }
                     }
                 }
+
                 if (fieldToCheck.isFlagged()) {
                     this.flag(x, y);
                 } else{
