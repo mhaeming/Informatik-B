@@ -12,6 +12,7 @@ public class Game {
 
     public static void main(String[] args){
         JFrame frame = new JFrame("MineSweeper");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         GameRules model = new GameRules();
         PlayingField view = new PlayingField(model);
         frame.setContentPane(view);

@@ -10,7 +10,19 @@ public class GameRules extends Observable {
 
     private int bombsToFind = 7;
 
+    // Should be: command line arguments
+    private int height = 5;
+    private int width = 15;
+
     public int getBombsToFind(){
         return this.bombsToFind;
+    }
+
+    public int getHeight(){
+        return this.height;
+    }
+
+    public int getWidth(){
+        return this.width;
     }
 }
