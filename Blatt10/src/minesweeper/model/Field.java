@@ -120,5 +120,6 @@ public class Field extends Observable{
                 }
             }
         }
+        this.countNeighborBombs();
     }
 }
