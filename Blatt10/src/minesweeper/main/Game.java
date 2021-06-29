@@ -1,6 +1,6 @@
 package minesweeper.main;
 
-import minesweeper.model.Board;
+import minesweeper.model.GameRules;
 import minesweeper.view.PlayingField;
 
 import javax.swing.*;
@@ -12,7 +12,8 @@ public class Game {
 
     public static void main(String[] args){
         JFrame frame = new JFrame("MineSweeper");
-        Board model = new Board(5,4,4);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        GameRules model = new GameRules();
         PlayingField view = new PlayingField(model);
         frame.setContentPane(view);
         frame.pack();
