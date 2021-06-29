@@ -45,6 +45,12 @@ public class PlayingField extends JPanel implements Observer {
             button.setPreferredSize(new Dimension(10,10));
             field.add(button);
 
+            // This is how to set the button so that you just see a number, but no edges
+            if (i == 4 || i == 6 || i == 18 || i == 23 || i == 36 || i == 60){
+                button.setBorderPainted(false);
+            }
+
+            // With this, buttons can be hidden
             if (i == 3 || i == 5 || i == 16 || i == 21 || i == 35 || i == 56){
                 button.setVisible(false);
             }
