@@ -1,6 +1,8 @@
 package minesweeper.view;
 
+import minesweeper.controller.GameController;
 import minesweeper.model.Board;
+import minesweeper.model.Field;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +20,16 @@ public class PlayingField extends JPanel implements Observer {
 
     private JLabel bombsToFind;
 
+    private JButton[][] buttons;
+
+    /**
+     * Constructor
+     * @param model
+     */
     public PlayingField(Board model) {
+        // Initialize the button-array
+        buttons = new JButton[model.getHeight()][model.getWidth()];
+
         // Fit the window size to the number of rows and cols
         this.setPreferredSize(new Dimension(model.getWidth()*80, model.getHeight()*80));
 
@@ -38,21 +49,18 @@ public class PlayingField extends JPanel implements Observer {
         this.setLayout(new BorderLayout());
 
         // Add all the buttons / small fields to the grid
-        for (int i = 1; i <= model.getHeight() * model.getWidth(); i++) {
-            Integer j = i;
-            String text = j.toString();
-            JButton button = new JButton(text);
-            button.setPreferredSize(new Dimension(10,10));
-            field.add(button);
+        for (int x = 0; x < model.getHeight(); x++){
+            for (int y = 0; y < model.getWidth(); y++) {
 
-            // This is how to set the button so that you just see a number, but no edges
-            if (i == 4 || i == 6 || i == 18 || i == 23 || i == 36 || i == 60){
+                JButton button = new JButton("");
+                button.setPreferredSize(new Dimension(10, 10));
+                button.setVisible(true);
+                button.setOpaque(true);
                 button.setBorderPainted(false);
-            }
-
-            // With this, buttons can be hidden
-            if (i == 3 || i == 5 || i == 16 || i == 21 || i == 35 || i == 56){
-                button.setVisible(false);
+                button.setBackground(Color.lightGray);
+                button.addMouseListener(new GameController(model.getField(x, y)));
+                field.add(button);
+                buttons[x][y] = button;
             }
         }
 
@@ -67,5 +75,53 @@ public class PlayingField extends JPanel implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
+        // Check for all fields if they are revealed or flagged
+        for (int x = 0; x < model.getHeight(); x++) {
+            for (int y = 0; y < model.getWidth(); y++) {
+                Field fieldToCheck = model.getField(x, y);
+                if (fieldToCheck.isRevealed()) {
+                    this.reveal(x, y);
+                }
+                if (fieldToCheck.isFlagged()) {
+                    this.flag(x, y);
+                } else{
+                    this.unflag(x, y);
+                }
+            }
+        }
+    }
+
+    /**
+     * Sets a single field to revealed-look
+     * @param x,y the coordinates of the field
+     */
+    private void reveal(int x, int y){
+        buttons[x][y].setBackground(Color.gray);
+    }
+
+    /**
+     * Sets a single field to the flag-look
+     * @param x,y the coordinates of the field
+     */
+    private void flag(int x, int y){
+        buttons[x][y].setText("!");
+    }
+
+    /**
+     * Sets a single field to the unflag-look
+     * @param x,y the coordinates of the field
+     */
+    private void unflag(int x, int y){
+        buttons[x][y].setText("");
+    }
+
+
+
+    /**
+     * Sets a sngle field to the look to show the number of bombs in the neighborhood
+     * @param x,y the coordinates of the field
+     */
+    private void setShowNeighborhood(int x, int y){
+        buttons[x][y].setBorderPainted(false);
     }
 }
