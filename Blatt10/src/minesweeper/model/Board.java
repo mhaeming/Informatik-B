@@ -140,4 +140,8 @@ public class Board extends Observable{
         return this.gamestate;
     }
 
+    public int getFlags() {
+        return this.flags;
+    }
+
 }

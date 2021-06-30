@@ -51,16 +51,7 @@ public class PlayingField extends JPanel implements Observer {
         // Add all the buttons / small fields to the grid
         for (int x = 0; x < model.getHeight(); x++){
             for (int y = 0; y < model.getWidth(); y++) {
-
-                JButton button = new JButton("");
-                button.setPreferredSize(new Dimension(10, 10));
-                button.setVisible(true);
-                button.setOpaque(true);
-                button.setBorderPainted(false);
-                button.setBackground(Color.lightGray);
-                button.addMouseListener(new GameController(model.getField(x, y)));
-                field.add(button);
-                buttons[x][y] = button;
+                this.field.add(new ButtonItem(model.getField(x, y)));
             }
         }
 
@@ -71,44 +62,16 @@ public class PlayingField extends JPanel implements Observer {
     }
 
 
-
     @Override
     public void update(Observable o, Object arg) {
-
-        // Check for all fields if they are revealed or flagged
-        for (int x = 0; x < model.getHeight(); x++) {
-            for (int y = 0; y < model.getWidth(); y++) {
-                Field fieldToCheck = model.getField(x, y);
-                if (fieldToCheck.isRevealed()) {
-                    this.reveal(x, y);
-                    for (Field neighbor: fieldToCheck.getNeighbors()){
-                        Integer nearBombs = neighbor.getNearBombs();
-                        int neighborX = neighbor.getX();
-                        int neighborY = neighbor.getY();
-
-                        // For debugging, print x and y of the neighbor, so we know which one's have been visited
-                        System.out.format("x: %d, y: %d \n", neighborX, neighborY);
-
-                        if(!neighbor.isRevealed()) {
-                            buttons[neighborX][neighborY].setText(nearBombs.toString());
-                        }
-                    }
-                }
-
-                if (fieldToCheck.isFlagged()) {
-                    this.flag(x, y);
-                } else{
-                    this.unflag(x, y);
-                }
-
-                if (model.getGameState() == 1) {
-                    JOptionPane.showMessageDialog(null, "You won!!");
-                    System.exit(0);
-                } else if (model.getGameState() == -1){
-                    JOptionPane.showMessageDialog(null, "BOOM, a bomb exploded. You lost!");
-                    System.exit(0);
-                }
-            }
+        if (model.getGameState() == 1) {
+            JOptionPane.showMessageDialog(null, "You won!!");
+            System.exit(0);
+        } else if (model.getGameState() == -1){
+            JOptionPane.showMessageDialog(null, "BOOM, a bomb exploded. You lost!");
+            System.exit(0);
+        } else {
+            bombsToFind.setText("Bombs to find: " + (this.model.getTotalBombs() - this.model.getFlags()));
         }
     }
 
@@ -118,24 +81,9 @@ public class PlayingField extends JPanel implements Observer {
      */
     private void reveal(int x, int y){
         buttons[x][y].setBackground(Color.gray);
+        Integer nearBombs = model.getField(x, y).getNearBombs();
+        buttons[x][y].setText(nearBombs.toString());
     }
-
-    /**
-     * Sets a single field to the flag-look
-     * @param x,y the coordinates of the field
-     */
-    private void flag(int x, int y){
-        buttons[x][y].setText("!");
-    }
-
-    /**
-     * Sets a single field to the unflag-look
-     * @param x,y the coordinates of the field
-     */
-    private void unflag(int x, int y){
-        buttons[x][y].setText("");
-    }
-
 
 
     /**

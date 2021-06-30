@@ -24,9 +24,7 @@ public class GameController extends MouseAdapter {
                 model.reveal();
                 break;
             case MouseEvent.BUTTON3: // right mouse button
-                if (!model.isRevealed()) {
-                    model.toggleFlag();
-                }
+                model.toggleFlag();
                 break;
 
         }
